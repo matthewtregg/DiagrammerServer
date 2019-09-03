@@ -23,10 +23,22 @@ class PgmCalls {
   async getDisplayPgms() {
     const display = "D"
     const [result] = await pool.execute(
-      `SELECT * FROM PGMCALLS WHERE PGMID <> CLDPGM AND CALLCLS = 'D' AND EXCPGM = ''`
+      `SELECT * FROM MVXD008.PGMCALLS WHERE PGMID <> CLDPGM AND CALLCLS = 'D' AND EXCPGM = ''`
     );  
     return result;
   };
+
+  async getDFDpgmPgms(pgmId) {
+    const display = "D"
+    const [result] = await pool.execute(
+      `SELECT * FROM MVXD008.PGMCALLS WHERE PGMID=? OR CLDPGM=? AND CALLCLS = 'D' AND EXCPGM = ''`,[pgmId,pgmId]); 
+    return result;
+
+  }
+
+
+
+
 
  
 
