@@ -34,6 +34,8 @@ const getDFDPgmInfo = async(req,res) => {
 const getDFDFileInfo = async(req,res) => {
   const entId = req.params.entId;
   const viewId = req.params.viewId;
+  console.log(entId);
+  console.log(viewId);
   const entRels =  new EntRels();
   const files = await entRels.getEntRel(entId);
   const CallingfileIds = files.filter(file => file.PAR!==entId).map(pgm=>pgm.PAR)
@@ -45,13 +47,11 @@ const getDFDFileInfo = async(req,res) => {
   if (CalledfileIds.length > 0) Calleddefs = await fileDefs.getEntDefList(CalledfileIds);
   const pgmFiles = new PgmFiles();
   const Pgms = await pgmFiles.getDFDinfo(viewId);
-  const PgmIds = Pgms.filter(file => file.ENTID!==entId).map(pgm=>pgm.PGMID);
-  const FileIds = CallingfileIds.concat(CalledfileIds); 
   const pgmSchema = new PgmSchema();
-  console.log(PgmIds);
-  console.log(FileIds);
-  const pgmSchemas = await pgmSchema.getPgmSchemaDefList(PgmIds);
-  const fileSchemas = await pgmSchema.getFileSchemaDefList(FileIds);
+  const PgmIds = Pgms.filter(file => file.ENTID!==entId).map(pgm=>pgm.PGMID);
+  if (PgmIds.length > 0)  await pgmSchema.getPgmSchemaDefList(PgmIds);
+  const FileIds = CallingfileIds.concat(CalledfileIds); 
+  if (FileIds.length > 0) await pgmSchema.getFileSchemaDefList(FileIds);
   // schema information 
   res.send(JSON.stringify({"Error" : false, "data":{ "CallingFiledefs":[Callingdefs],"CalledFileDefs": [Calleddefs], "Pgms":[Pgms]}}))
 }
