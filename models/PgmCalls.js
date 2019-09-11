@@ -20,11 +20,11 @@ class PgmCalls {
     appNm
   ) {}
 
-  async getDisplayPgms() {
+ async getDisplayPgms() {
     const display = "D"
     const [result] = await pool.execute(
       `SELECT * FROM MVXD008.PGMCALLS WHERE PGMID <> CLDPGM AND CALLCLS = 'D' AND EXCPGM = ''`
-    );  
+    )
     return result;
   };
 
@@ -35,7 +35,6 @@ class PgmCalls {
     return result;
 
   }
-
 
 
 

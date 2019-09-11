@@ -27,14 +27,18 @@ class PgmFiles {
   ) {}
 
   async getPgmFiles(pgmId) {
-    
     const [result] = await pool.execute(
     `SELECT * FROM PgmFiles WHERE PGMID = ?`,[pgmId] 
     );  
     return result;
   };
 
- 
+  async getDFDinfo(viewId) {
+    const [result] = await pool.execute(
+      `SELECT * FROM PgmFiles WHERE VIEWID = ?`, [viewId]
+    );
+    return result;
+  }
  
 }
 

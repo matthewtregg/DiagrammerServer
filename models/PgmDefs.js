@@ -31,7 +31,6 @@ class PgmDefs {
       else pgmIdValues += ","+ "'"+id + "'"  
     });
     pgmIdValues += ")"
-    console.log(pgmIdValues);
     const [result] = await pool.execute(
     `SELECT * FROM PgmDefs WHERE PGMID IN ${pgmIdValues}` 
     );  
