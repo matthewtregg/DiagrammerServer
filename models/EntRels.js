@@ -44,6 +44,7 @@ class EntRels {
     return result;
   };
   
+  // get children
   async getEntRelChild(ent) {
     const [result] = await pool.execute(
       `SELECT * FROM MVXD008.ENTRELS WHERE PAR = ? AND PAR <> CHLD`,[ent]
@@ -57,6 +58,8 @@ class EntRels {
     );
     return result;
   }
+
+
  
 }
 

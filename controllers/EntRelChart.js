@@ -27,10 +27,13 @@ const createPgmStrChartTwo = async(req,res) => {
 const getEntRelChild = async(req,res) => {
   const ent = req.params.ent;
   entRels = new EntRels();
+   // get children
   const entrels = await entRels.getEntRelChild(ent);
   const childIds = entrels.map(rel => rel.CHLD.trim())
+
   const otherRels = await entRels.getOtherRels(childIds)
   const children = entrels.filter((entID) => {return entID.PAR.trim() === ent});
+  // left join 
   for (rel of entrels) {
     if (children.includes(rel)) {
       rel.lastChild = false;
@@ -56,6 +59,7 @@ const getEntRelParent = async(req,res) => {
       if (entrelTest.length >0) rel.lastParent = true;
     }  
     rel.ButtonPressed = false;
+    //ADD ON IN FRONT END
   }
   res.send(JSON.stringify({"Error" : false, "data" : [entrels,otherRels]}))
 }

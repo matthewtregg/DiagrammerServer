@@ -32,6 +32,14 @@ class Entities {
     return result;
   };
 
+  async getFileList(ent) {
+    const [result] = await pool.execute (
+      `SELECT DISTINCT ENTID FROM MVXD008.ENTRELS` 
+      
+    )
+    return result;
+  }
+
 }
 
 module.exports = Entities;
