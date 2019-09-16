@@ -9,7 +9,7 @@ const getDFDPgmInfo = async(req,res) => {
   DFDpgms.getDFDPgmInfo(pgmId).then((DFDPgmInfo)=> {
     DFDpgms.getDFDFileInfo(pgmId).then((DFDFileInfo)=> {
       DFDpgms.getCentralSchema(pgmId).then((centralSchema)=> {
-        res.send(JSON.stringify({"Error" : false, "data":{ "DFDPgmInfo":[DFDPgmInfo], "DFDFileInfo":[DFDFileInfo],"centralSchema":[centralSchema]}}));   
+        res.send(JSON.stringify({"Error" : false, "data":{ "DFDPgmInfo":DFDPgmInfo, "DFDFileInfo":DFDFileInfo,"centralSchema":centralSchema}}));   
       }) 
     })
   });
@@ -19,11 +19,15 @@ const getDFDFileInfo = async(req,res) => {
   const entId = req.params.entId;
   const viewId = req.params.viewId;
   const entRels =  new DFDEnts();
-  const DFDEntInfo = await entRels.getDFDEntInfo(entId);
-  const DFDPgmInfo = await entRels.getDFDPgmInfo(viewId);
-  const centralSchema = await entRels.getCentralSchema(entId);
+  entRels.getDFDEntInfo(entId).then((DFDFileInfo)=> {
+    entRels.getDFDPgmInfo(viewId).then((DFDPgmInfo)=> {
+      entRels.getCentralSchema(entId).then((centralSchema)=> {
+        res.send(JSON.stringify({"Error" : false, "data":{ "DFDPgmInfo":DFDPgmInfo[0], "DFDEntInfo":DFDFileInfo[0],"centralSchema":centralSchema[0]}}));   
+      }) 
+    })
+  });
+
   // schema information 
-  res.send(JSON.stringify({"Error" : false, "data":{ "DFDEntInfo":[DFDEntInfo],"DFDPgmInfo": [DFDPgmInfo], "centralSchema":[centralSchema]}}))
 }
 
 

@@ -7,32 +7,29 @@ const getFileField= async(req,res) => {
  const dbname = req.params.dbName;
  const fieldId = req.params.fieldId;
  const pgmSchema = new PgmSchema();
- const result = await pgmSchema.getFieldWhereUsed(dbname, fieldId);
- res.send(result);   
+ pgmSchema.getFieldWhereUsed(dbname, fieldId).then(result => res.send(result[0]));
+   
 }
 
 const getPgms = async(req,res) => {
  const dbname = req.params.dbName;
  const pgmId = req.params.PgmId;
  const pgmCalls = new PgmCalls();
- const result = await pgmCalls.getWhereUsedPgms(dbname, pgmId);
- res.send(result);   
+ pgmCalls.getWhereUsedPgms(dbname, pgmId).then(result => res.send(result[0]));
 }
 
 const getEnts = async(req,res) => {
  const dbname = req.params.dbName;
  const entId = req.params.EntId;
  const pgmFiles = new PgmFiles();
- const result = await pgmFiles.getWhereUsedFiles(dbname, entId);
- res.send(result);   
+ pgmFiles.getWhereUsedFiles(dbname, entId).then(result => res.send(result[0]));
 }
 
 const getVar= async(req,res) => {
  const dbname = req.params.dbName;
  const variable = req.params.Var;
  const pgmCode = new PgmCode();
- const result = await pgmCode.getVarUsed(dbname, variable);
- res.send(result);   
+ pgmCode.getVarUsed(dbname, variable).then(result => res.send(result[0]));
 }
 
 module.exports = {

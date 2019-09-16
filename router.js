@@ -17,8 +17,8 @@ router
   .get('/getEntRelParent/:ent', EntRelChart.getEntRelParent)
   .get('/getEntRelChild/:ent', EntRelChart.getEntRelChild)
   .get('/findFileWhereUsedField/:dbName/:fieldId',WhereUsed.getFileField) 
-  .get('/findPgmWhereUsedField/:dbName/:PgmId', WhereUsed.getPgms) 
-  .get('/findEntWhereUsedField/:dbName/:EntId',WhereUsed.getEnts) 
+  .get('/findPgmWhereUsed/:dbName/:PgmId', WhereUsed.getPgms) 
+  .get('/findEntWhereUsed/:dbName/:EntId',WhereUsed.getEnts) 
   .get('/findVariableWhereUsedSource/:dbName/:Var', WhereUsed.getVar) 
 
 

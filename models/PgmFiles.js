@@ -35,14 +35,13 @@ class PgmFiles {
 
     //PGMDEFS
   async getWhereUsedFiles(dbname, entId) {
-    const [result] = await pool.execute(
+    return pool.execute(
       `SELECT * FROM ${dbname}.PgmFiles pf 
       INNER JOIN ${dbname}.PGMDEFS pd
       ON pf.PGMID = pd.PGMID  
       WHERE pf.ENTID = ?`
       ,[entId] 
       );  
-    return result;
   }
 
 

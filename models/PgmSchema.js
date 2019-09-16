@@ -45,13 +45,12 @@ class PgmSchema {
 
   //PGMDEFS
   async getFieldWhereUsed(dbname,fieldId){
-    const [result] = await pool.execute(
+    return pool.execute(
       `SELECT * FROM ${dbname}.PGMSCMDB pb
       INNER JOIN ${dbname}.PGMDEFS pd
       ON pb.PGMID = pd.PGMID  
       WHERE pb.SHORTNM = '${fieldId}'`
       );  
-      return result;
   }
 
 

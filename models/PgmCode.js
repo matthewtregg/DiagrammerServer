@@ -58,7 +58,7 @@ class PgmCode {
     `select pc.PGMID as PgmID, pc.LINENUM as LineNum, pc.STN as Stn from ${dbname}.PGMCODE pc
      INNER JOIN ${dbname}.PGMDEFS pd
      ON pc.PGMID = pd.PGMID  
-     WHERE pc.MVARDB='${variable}' OR pc.SVAR1DB='${variable}' OR pc.SVAR2DB='${variable}' OR pc.SVAR3DB='${variable}' OR pc.SVAR4DB='${variable}'
+     WHERE pc.MVAR='${variable}' OR pc.SVAR1='${variable}' OR pc.SVAR2='${variable}' OR pc.SVAR3='${variable}' OR pc.SVAR4='${variable}'
      `,
     ); 
     return result;

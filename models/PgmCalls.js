@@ -40,12 +40,11 @@ class PgmCalls {
   //PGM DEFS
   async getWhereUsedPgms(dbname, pgmId) {
     const display = "D"
-    const [result] = await pool.execute(
+    return pool.execute(
       `SELECT * FROM ${dbname}.PGMCALLS pc
       INNER JOIN ${dbname}.PGMDEFS pd
       ON pc.PGMID = pd.PGMID  
       WHERE pc.PGMID=? OR pc.CLDPGM=? AND pc.EXCPGM=''`,[pgmId,pgmId]); 
-    return result;
   }
  
 
