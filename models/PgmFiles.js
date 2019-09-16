@@ -33,6 +33,31 @@ class PgmFiles {
     return result;
   };
 
+    //PGMDEFS
+  async getWhereUsedFiles(dbname, entId) {
+    const [result] = await pool.execute(
+      `SELECT * FROM ${dbname}.PgmFiles pf 
+      INNER JOIN ${dbname}.PGMDEFS pd
+      ON pf.PGMID = pd.PGMID  
+      WHERE pf.ENTID = ?`
+      ,[entId] 
+      );  
+    return result;
+  }
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
   async getDFDinfo(viewId) {
     const [result] = await pool.execute(
       `SELECT * FROM PgmFiles WHERE VIEWID = ?`, [viewId]

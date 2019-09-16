@@ -52,7 +52,18 @@ class PgmCode {
     return result;
   };
 
- 
+    //PGM DEFS
+  async getVarUsed(dbname,variable) {
+    const [result] = await pool.execute(
+    `select pc.PGMID as PgmID, pc.LINENUM as LineNum, pc.STN as Stn from ${dbname}.PGMCODE pc
+     INNER JOIN ${dbname}.PGMDEFS pd
+     ON pc.PGMID = pd.PGMID  
+     WHERE pc.MVARDB='${variable}' OR pc.SVAR1DB='${variable}' OR pc.SVAR2DB='${variable}' OR pc.SVAR3DB='${variable}' OR pc.SVAR4DB='${variable}'
+     `,
+    ); 
+    return result;
+  }
+
  
 }
 

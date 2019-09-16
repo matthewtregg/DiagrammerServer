@@ -43,6 +43,19 @@ class PgmSchema {
     return result;
   };
 
+  //PGMDEFS
+  async getFieldWhereUsed(dbname,fieldId){
+    const [result] = await pool.execute(
+      `SELECT * FROM ${dbname}.PGMSCMDB pb
+      INNER JOIN ${dbname}.PGMDEFS pd
+      ON pb.PGMID = pd.PGMID  
+      WHERE pb.SHORTNM = '${fieldId}'`
+      );  
+      return result;
+  }
+
+
 }
 
 module.exports = PgmSchema;
+
