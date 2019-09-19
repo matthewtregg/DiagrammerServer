@@ -41,10 +41,11 @@ class PgmCalls {
   async getWhereUsedPgms(dbname, pgmId) {
     const display = "D"
     return pool.execute(
-      `SELECT * FROM ${dbname}.PGMCALLS pc
-      INNER JOIN ${dbname}.PGMDEFS pd
-      ON pc.PGMID = pd.PGMID  
-      WHERE pc.PGMID=? OR pc.CLDPGM=? AND pc.EXCPGM=''`,[pgmId,pgmId]); 
+      `SELECT pc.PGMID, pc.CLDPGM, pd.PGMTX, pd.PGMTYP  FROM ${dbname}.PGMCALLS pc INNER JOIN ${dbname}.PGMDEFS pd ON pc.PGMID = pd.PGMID
+      WHERE pc.PGMID = '${pgmId}' AND pc.EXCPGM = '' UNION
+      SELECT pc.PGMID, pc.CLDPGM, pd.PGMTX, pd.PGMTYP  FROM ${dbname}.PGMCALLS pc INNER JOIN ${dbname}.PGMDEFS pd ON pc.CLDPGM = pd.PGMID
+      WHERE pc.CLDPGM = '${pgmId}' AND pc.EXCPGM = ''`
+     );
   }
  
 

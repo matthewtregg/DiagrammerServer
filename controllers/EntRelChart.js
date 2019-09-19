@@ -1,34 +1,15 @@
-const {buildChart} = require('../Diagrams/EntRelationshipDiagram.js')
-const {convertChildrenHierarchy} = require('../Diagrams/DendogramData.js')
+
+
+// reconfigure entrel chart API 
+
 const EntRels = require('../models/EntRels');
-
-const createPgmStrChartTwo = async(req,res) => {
-  entRels = new EntRels();
-  const entrels = await entRels.getEntRels()
-  const startingPgm = "OTPROJ";
-  
-  let Diagrams = buildChart(entrels, startingPgm)
-  // Make CINTAS Children 
-  // Make CINTAS Parents 
-  // 
-  let ParentTree = Diagrams[0];
-  let ParentData = ParentTree[0];
-  ParentTree = ParentTree[1];
-  let ChildTree = Diagrams[1]; 
-  let ChildData = ChildTree[0];
-  ChildTree = ChildTree[1];
-  
-  let RemRelsGoingDown = convertChildrenHierarchy(Diagrams);
-  res.send(JSON.stringify({"Error" : false, "data" : [ParentTree,ChildTree, RemRelsGoingDown]}));   
-
-};
-
 
 const getEntRelChild = async(req,res) => {
   const ent = req.params.ent;
   entRels = new EntRels();
    // get children
   const entrels = await entRels.getEntRelChild(ent);
+  
   const childIds = entrels.map(rel => rel.CHLD.trim())
 
   const otherRels = await entRels.getOtherRels(childIds)
@@ -102,7 +83,6 @@ const getEntRelData = async(req,res) => {
 
 
 module.exports = {
-  createPgmStrChartTwo,
   getEntRelData,
   getEntRelInfo,
   getEntRelChild,

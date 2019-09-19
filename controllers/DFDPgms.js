@@ -3,37 +3,67 @@ const DFDEnts = require('../models/DFDEnts');
 
 // needs refactoring
 // make back end non-blocking
-const getDFDPgmInfo = async(req,res) => {
+const getDFDPgmPgmInfo = async(req,res) => {
   const pgmId = req.params.pgmId;
   const DFDpgms =  new DFDPgms();
-  DFDpgms.getDFDPgmInfo(pgmId).then((DFDPgmInfo)=> {
-    DFDpgms.getDFDFileInfo(pgmId).then((DFDFileInfo)=> {
-      DFDpgms.getCentralSchema(pgmId).then((centralSchema)=> {
-        res.send(JSON.stringify({"Error" : false, "data":{ "DFDPgmInfo":DFDPgmInfo, "DFDFileInfo":DFDFileInfo,"centralSchema":centralSchema}}));   
-      }) 
-    })
+    DFDpgms.getDFDPgmInfo(pgmId).then((DFDPgmInfo)=> {   
+      res.send(JSON.stringify({"Error" : false, "data": DFDPgmInfo}));   
   });
 };
 
-const getDFDFileInfo = async(req,res) => {
-  const entId = req.params.entId;
+const getDFDPgmFileInfo = async(req,res) => {
+  const pgmId = req.params.pgmId;
+  const DFDpgms =  new DFDPgms();
+      DFDpgms.getDFDFileInfo(pgmId).then((DFDFileInfo)=> {
+        res.send(JSON.stringify({"Error" : false, "data": DFDFileInfo}));   
+    }); 
+};
+
+const getDFDPgmCentralInfo = async(req,res) => {
+  const pgmId = req.params.pgmId;
+  const DFDpgms =  new DFDPgms();
+    DFDpgms.getCentralSchema(pgmId).then((centralSchema)=> {
+      res.send(JSON.stringify({"Error" : false, "data": centralSchema}));   
+  }) 
+};
+
+
+//DFDPgmInfo":DFDPgmInfo[0], "DFDEntInfo":DFDFileInfo[0],"centralSchema":centralSchema[0]
+
+const getDFDFilePgmInfo = async(req,res) => {
   const viewId = req.params.viewId;
   const entRels =  new DFDEnts();
-  entRels.getDFDEntInfo(entId).then((DFDFileInfo)=> {
-    entRels.getDFDPgmInfo(viewId).then((DFDPgmInfo)=> {
-      entRels.getCentralSchema(entId).then((centralSchema)=> {
-        res.send(JSON.stringify({"Error" : false, "data":{ "DFDPgmInfo":DFDPgmInfo[0], "DFDEntInfo":DFDFileInfo[0],"centralSchema":centralSchema[0]}}));   
-      }) 
-    })
+  entRels.getDFDPgmInfo(viewId).then((DFDPgmInfo)=> {
+    res.send(JSON.stringify({"Error" : false, "data": DFDPgmInfo[0]}));   
   });
+};
+
+const getDFDFileFileInfo = async(req,res) => {
+  const entId = req.params.entId;
+  const entRels =  new DFDEnts();
+  entRels.getDFDEntInfo(entId).then((DFDFileInfo)=> {
+      res.send(JSON.stringify({"Error" : false, "data": DFDFileInfo[0]}));   
+    }); 
+};
+
+const getDFDFileCentralInfo = async(req,res) => {
+  const entId = req.params.entId;
+  const entRels =  new DFDEnts();
+  entRels.getCentralSchema(entId).then((centralSchema)=> {
+      res.send(JSON.stringify({"Error" : false, "data": centralSchema[0]}));   
+  }) 
+};
 
   // schema information 
-}
-
 
 module.exports = {
-  getDFDPgmInfo,
-  getDFDFileInfo
+  getDFDFilePgmInfo,
+  getDFDFileFileInfo,
+  getDFDFileCentralInfo,
+  getDFDPgmPgmInfo,
+  getDFDPgmFileInfo,
+  getDFDPgmCentralInfo,
+ 
 }
 
 //WhereUsed api ends here

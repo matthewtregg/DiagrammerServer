@@ -12,10 +12,10 @@ class DFDEnts {
       );  
   };
 
-  async getDFDPgmInfo(viewId) {
+  async getDFDPgmInfo(entId) {
     return  pool.execute(
     `SELECT  * FROM MVXD008.PGMFILES fl
-    WHERE fl.VIEWID = '${viewId}'`
+    WHERE fl.ENTID = '${entId}'`
     );  
   };
 

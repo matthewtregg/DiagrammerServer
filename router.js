@@ -10,8 +10,12 @@ router
   .get('/ProgramStructureChart', Diagrams.createPgmStrChartTwo)
   .get('/ProgramList', List.getProgramList)
   .get('/SourceBrowser/PgmCodeData/:pgmId', Source.getSourceCode)
-  .get('/PgmDFD/:pgmId', DFDPgms.getDFDPgmInfo)
-  .get('/FileDFD/:viewId/:entId', DFDPgms.getDFDFileInfo)
+  .get('/PgmDFDPgm/:pgmId', DFDPgms.getDFDPgmPgmInfo)
+  .get('/PgmDFDFile/:pgmId', DFDPgms.getDFDPgmFileInfo)
+  .get('/PgmDFDCentral/:pgmId', DFDPgms.getDFDPgmCentralInfo)
+  .get('/FileDFDPgm/:entId', DFDPgms.getDFDFilePgmInfo)
+  .get('/FileDFDEnt/:entId', DFDPgms.getDFDFileFileInfo)
+  .get('/FileDFDCentral/:entId', DFDPgms.getDFDFileCentralInfo)
   .get('/EntityRelationshipChart' , EntRelChart.getEntRelData)
   .get('/EntRel/:ent', EntRelChart.getEntRelInfo)
   .get('/getEntRelParent/:ent', EntRelChart.getEntRelParent)
@@ -19,10 +23,7 @@ router
   .get('/findFileWhereUsedField/:dbName/:fieldId',WhereUsed.getFileField) 
   .get('/findPgmWhereUsed/:dbName/:PgmId', WhereUsed.getPgms) 
   .get('/findEntWhereUsed/:dbName/:EntId',WhereUsed.getEnts) 
-  .get('/findVariableWhereUsedSource/:dbName/:Var', WhereUsed.getVar) 
-
-
-
+  .get('/findVarWhereUsedSource/:dbName/:Var', WhereUsed.getVar) 
 
   // STNTYPE 
   // just file or pgm where used 
