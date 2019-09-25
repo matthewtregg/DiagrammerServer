@@ -25,9 +25,19 @@ router
   .get('/findFileWhereUsedField/:dbName/:fieldId',WhereUsed.getFileField) 
   .get('/findPgmWhereUsed/:dbName/:PgmId', WhereUsed.getPgms) 
   .get('/findEntWhereUsed/:dbName/:EntId',WhereUsed.getEnts) 
-  // .get('/PgmStrChartBoxes/:pgms/:dbName', Diagrams.getPgmSchemaBoxes)
   .get('/findVarWhereUsedSource/:dbName/:Var', WhereUsed.getVar) 
   .get('/getrep', Repository.getRep)
+
+  // additional routes for:
+  //1 GET PGMCODE BY PGMID & WHEREUSED INFO  
+  
+  //2
+  // A) PGMSCHEMA BOXES 
+  // B) FILESCHEMA BOXES - ENTITY BOXES
+  // C)  DFD BOXES 
+
+
+
 
   // STNTYPE 
   // just file or pgm where used 

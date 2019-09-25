@@ -27,9 +27,6 @@ const getDFDPgmCentralInfo = async(req,res) => {
   }) 
 };
 
-
-//DFDPgmInfo":DFDPgmInfo[0], "DFDEntInfo":DFDFileInfo[0],"centralSchema":centralSchema[0]
-
 const getDFDFilePgmInfo = async(req,res) => {
   const viewId = req.params.viewId;
   const entRels =  new DFDEnts();
