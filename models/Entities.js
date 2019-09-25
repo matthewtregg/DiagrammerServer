@@ -32,10 +32,9 @@ class Entities {
     return result;
   };
 
-  async getFileList(ent) {
+  async getFileList(dbName) {
     const [result] = await pool.execute (
-      `SELECT DISTINCT ENTID FROM MVXD008.ENTRELS` 
-      
+      `SELECT DISTINCT ENTID FROM ${dbName}.ENTITIES`   
     )
     return result;
   }

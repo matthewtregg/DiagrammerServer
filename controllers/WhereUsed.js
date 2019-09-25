@@ -28,11 +28,8 @@ const getEnts = async(req,res) => {
 const getVar= async(req,res) => {
  const dbname = req.params.dbName;
  const variable = req.params.Var;
- console.log(variable);
  const pgmCode = new PgmCode();
- pgmCode.getVarUsed(dbname, variable).then(result => {
-  console.log(result) 
-  res.send(result[0])});
+ pgmCode.getVarUsed(dbname, variable).then(result => {res.send(result[0])});
 }
 
 module.exports = {

@@ -16,6 +16,7 @@ class EntRels {
   ) {}
 
 
+
   async getOtherRels(entArray) {
     let arrayItems = "("
     entArray.forEach((id,index) => {
@@ -47,14 +48,22 @@ class EntRels {
   // get children
   async getEntRelChild(ent) {
     const [result] = await pool.execute(
-      `SELECT * FROM MVXD008.ENTRELS WHERE PAR = ? AND PAR <> CHLD`,[ent]
+      `SELECT ent1.PAR AS PAR, ent1.CHLD AS CHLD, ent2.CHLD AS LASTCHILD FROM MVXD008.ENTRELS ent1 
+      LEFT JOIN MVXD008.ENTRELS ent2 ON ent1.CHLD = ent2.PAR
+      WHERE ent1.PAR = ? AND ent1.PAR <> ent1.CHLD`
+      ,[ent]
     );
     return result;
   }
 
+
+  
   async getEntRelParent(ent) {
     const [result] = await pool.execute(
-      `SELECT * FROM MVXD008.ENTRELS WHERE CHLD = ? AND PAR <> CHLD`,[ent]
+      `SELECT ent1.CHLD AS CHLD, ent1.PAR AS PAR, ent2.PAR AS LASTPARENT FROM MVXD008.ENTRELS ent1 
+      LEFT JOIN MVXD008.ENTRELS ent2 ON ent1.PAR = ent2.CHLD
+      WHERE ent1.CHLD = ? AND ent1.PAR <> ent1.CHLD`
+      ,[ent]
     );
     return result;
   }

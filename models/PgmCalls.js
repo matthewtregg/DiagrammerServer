@@ -20,10 +20,10 @@ class PgmCalls {
     appNm
   ) {}
 
- async getDisplayPgms() {
+ async getDisplayPgms(dbName) {
     const display = "D"
     const [result] = await pool.execute(
-      `SELECT * FROM MVXD008.PGMCALLS WHERE PGMID <> CLDPGM AND CALLCLS = 'D' AND EXCPGM = ''`
+      `SELECT * FROM ${dbName}.PGMCALLS WHERE PGMID <> CLDPGM AND CALLCLS = 'D' AND EXCPGM = ''`
     )
     return result;
   };
@@ -41,17 +41,17 @@ class PgmCalls {
   async getWhereUsedPgms(dbname, pgmId) {
     const display = "D"
     return pool.execute(
-      `SELECT pc.PGMID, pc.CLDPGM, pd.PGMTX, pd.PGMTYP  FROM ${dbname}.PGMCALLS pc INNER JOIN ${dbname}.PGMDEFS pd ON pc.PGMID = pd.PGMID
+      `SELECT pc.PGMID, pc.CLDPGM, pd.PGMTX, pd.PGMTYP  FROM ${dbname}.PGMCALLS pc INNER JOIN ${dbname}.PGMDEFS pd ON pc.CLDPGM = pd.PGMID
       WHERE pc.PGMID = '${pgmId}' AND pc.EXCPGM = '' UNION
-      SELECT pc.PGMID, pc.CLDPGM, pd.PGMTX, pd.PGMTYP  FROM ${dbname}.PGMCALLS pc INNER JOIN ${dbname}.PGMDEFS pd ON pc.CLDPGM = pd.PGMID
+      SELECT pc.PGMID, pc.CLDPGM, pd.PGMTX, pd.PGMTYP  FROM ${dbname}.PGMCALLS pc INNER JOIN ${dbname}.PGMDEFS pd ON pc.PGMID = pd.PGMID
       WHERE pc.CLDPGM = '${pgmId}' AND pc.EXCPGM = ''`
      );
   }
  
 
-  async getPgmList() {
+  async getPgmList(dbName) {
     const [result] = await pool.execute(
-    `SELECT DISTINCT PGMID FROM PgmCalls` 
+    `SELECT DISTINCT PGMID FROM ${dbName}.PgmCalls`
     );  
     return result;
   };
