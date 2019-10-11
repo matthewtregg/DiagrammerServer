@@ -1,13 +1,13 @@
-const PgmCalls = require('../models/PgmCalls');
+const PgmDefs = require('../models/PgmDefs');
 const Entities = require('../models/Entities');
 
 
 const getProgramList = async(req,res) => {
+  console.log("Pgm List");
   const dbname = req.params.dbName;
-  const pgmCalls = new PgmCalls ();
-  const programList = await pgmCalls.getPgmList(dbname); 
+  const pgmDefs = new PgmDefs ();
+  const programList = await pgmDefs.getPgmList(dbname); 
   res.send(programList);   
-
 }
 
 const getEntList = async(req, res) => {

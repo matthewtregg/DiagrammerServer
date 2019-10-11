@@ -38,6 +38,12 @@ class PgmDefs {
   };
 
  
+  async getPgmList(dbName) {
+    const [result] = await pool.execute(
+    `SELECT PGMTYP,PGMTX,DIRNM, PGMID FROM ${dbName}.PgmDefs`
+    );  
+    return result;
+  };
  
 }
 
