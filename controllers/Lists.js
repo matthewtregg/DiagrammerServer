@@ -3,7 +3,6 @@ const Entities = require('../models/Entities');
 
 
 const getProgramList = async(req,res) => {
-  console.log("Pgm List");
   const dbname = req.params.dbName;
   const pgmDefs = new PgmDefs ();
   const programList = await pgmDefs.getPgmList(dbname); 

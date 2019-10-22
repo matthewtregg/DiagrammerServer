@@ -12,11 +12,11 @@ const getEntList = async(req,res) => {
   entRels = new Entities();
   const entList = await entRels.getFileList();
   res.send(JSON.stringify({"Error" : false, "data" : [entList]}))
-
 }
 
 const getEntRelChild = async(req,res) => {
   const ent = req.params.ent;
+  const dbname = req.params.dbName;
   entRels = new EntRels();
    // get children
   const entrels = await entRels.getEntRelChild(ent);
@@ -25,6 +25,7 @@ const getEntRelChild = async(req,res) => {
 
 const getEntRelParent = async(req,res) => {
   const ent = req.params.ent;
+  const dbname = req.params.dbName;
   entRels = new EntRels();
   const entrels = await entRels.getEntRelParent(ent);
   res.send(JSON.stringify({"Error" : false, "data" : entrels}))
@@ -32,6 +33,7 @@ const getEntRelParent = async(req,res) => {
 
 const getEntRelInfo = async(req,res) => {
   const ent = req.params.ent;
+  const dbname = req.params.dbName;
   entRels = new EntRels();
   const entrels = await entRels.getEntRel(ent);
   const children = entrels.filter((entID) => {return entID.PAR.trim() === ent});

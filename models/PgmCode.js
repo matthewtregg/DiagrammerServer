@@ -45,9 +45,9 @@ class PgmCode {
     appnm
   ) {}
 
-  async getPgmSource(pgmID) {
+  async getPgmSource(pgmID, dbname) {
     const [result] = await pool.execute(
-    `SELECT * FROM MVXD008.PGMCODE WHERE PGMID = '${pgmID}'` 
+    `SELECT * FROM ${dbname}.PGMCODE WHERE PGMID = '${pgmID}'` 
     ); 
     return result;
   };
