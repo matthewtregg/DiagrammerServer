@@ -54,6 +54,15 @@ class PgmSchema {
   }
 
 
+  async getFullFile() {
+    const [result] = await pool.execute(
+      `SELECT * FROM MVXD008.PGMSCMDB`
+    )
+    return result;
+  }
+
+
+
 }
 
 module.exports = PgmSchema;

@@ -44,6 +44,13 @@ class PgmDefs {
     );  
     return result;
   };
+
+  async getFullFile() {
+    const [result] = await pool.execute(
+      `SELECT * FROM MVXD008.PgmDefs`
+    )
+    return result;
+  }
  
 }
 

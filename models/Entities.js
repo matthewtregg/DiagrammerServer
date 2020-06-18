@@ -39,6 +39,13 @@ class Entities {
     return result;
   }
 
+  async getFullFile() {
+    const [result] = await pool.execute(
+      `SELECT * FROM MVXD008.ENTITIES`
+    )
+    return result;
+  }
+
 }
 
 module.exports = Entities;

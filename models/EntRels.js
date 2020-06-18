@@ -31,6 +31,13 @@ class EntRels {
   };
 
 
+  async getFullFile() {
+    const [result] = await pool.execute(
+      `SELECT * FROM MVXD008.ENTRELS`
+    )
+    return result;
+  }
+
   async getEntRels() {
     const [result] = await pool.execute(
       `SELECT * FROM MVXD008.ENTRELS WHERE PAR <> CHLD`

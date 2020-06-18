@@ -6,6 +6,7 @@ const DFDPgms = require('./controllers/DFDPgms');
 const EntRelChart = require('./controllers/EntRelChart'); 
 const WhereUsed = require('./controllers/WhereUsed'); 
 const Repository = require('./controllers/Repository'); 
+const FullFiles = require('./controllers/FullFiles'); 
 
 
 router
@@ -27,6 +28,13 @@ router
   .get('/findEntWhereUsed/:dbName/:EntId',WhereUsed.getEnts) 
   .get('/findVarWhereUsedSource/:dbName/:Var', WhereUsed.getVar) 
   .get('/getrep', Repository.getRep)
+  .get('/EntFile/:dbName', FullFiles.getEntrels)
+  .get('/PgmFiles/:dbName', FullFiles.getPgmFiles)
+  .get('/PgmSchema/:dbName', FullFiles.getPgmSchema)
+  .get('/PgmDefs/:dbName', FullFiles.getPgmDefs)
+  .get('/Entities/:dbName', FullFiles.getEntities)
+
+
 
   // additional routes for:
   //1 GET PGMCODE BY PGMID & WHEREUSED INFO  

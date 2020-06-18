@@ -45,7 +45,12 @@ class PgmFiles {
   }
 
 
-
+  async getFullFile() {
+    const [result] = await pool.execute(
+      `SELECT * FROM MVXD008.PgmFiles`
+    )
+    return result;
+  }
 
 
   
