@@ -30,7 +30,7 @@ router
   .get('/getrep', Repository.getRep)
   .get('/EntFile/:dbName', FullFiles.getEntrels)
   .get('/PgmFiles/:dbName', FullFiles.getPgmFiles)
-  .get('/PgmSchema/:dbName', FullFiles.getPgmSchema)
+  .get('/PgmSchema/:pgm/:ent', FullFiles.getPgmSchema)
   .get('/PgmDefs/:dbName', FullFiles.getPgmDefs)
   .get('/Entities/:dbName', FullFiles.getEntities)
 
@@ -44,7 +44,7 @@ router
   // B) FILESCHEMA BOXES - ENTITY BOXES
   // C)  DFD BOXES 
 
-
+ // http://localhost:4000/PgmSchema/APS030/FAPBKQ
 
 
   // STNTYPE 

@@ -18,17 +18,25 @@ const getPgmFiles = async(req, res) => {
     const dbname = req.params.dbName;
     const pgmfiles = new PgmFiles ();
     const pgmFile = await pgmfiles.getFullFile(dbname);
+    const finalpgmFile = pgmFile.map((file)=>{
+        if(file.ENTID)file.ENTID = file.ENTID.trim();
+        if(file.VIEWID)file.VIEWID = file.VIEWID.trim();    
+    return file
+    }) 
     console.log(pgmFile);
-    res.send(pgmFile);
+    res.send(finalpgmFile);
 }
 
 const getPgmSchema = async(req, res) => {
-    const dbname = req.params.dbName;
+    const pgm = req.params.pgm;
+    const ent = req.params.ent;
     const pgmschema = new PgmSchema ();
-    const schemafile = await pgmschema.getFullFile(dbname);
+    const schemafile = await pgmschema.getPgmSchema(pgm,ent);
     console.log(schemafile);
-    res.send(entFile);
+    res.send(schemafile);
 }
+
+
 
 
 const getPgmDefs = async(req, res) => {

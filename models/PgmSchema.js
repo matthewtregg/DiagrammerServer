@@ -62,6 +62,13 @@ class PgmSchema {
   }
 
 
+  async getPgmSchema(PgmId,EntId) {
+    const [result] = await pool.execute(
+        `SELECT * FROM MVXD008.PGMSCMDB WHERE PGMID = ? AND ENTID = ?`, [PgmId, EntId]
+      );
+    return result;
+  }
+
 
 }
 
