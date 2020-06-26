@@ -6,7 +6,14 @@ const getProgramList = async(req,res) => {
   const dbname = req.params.dbName;
   const pgmDefs = new PgmDefs ();
   const programList = await pgmDefs.getPgmList(dbname); 
-  res.send(programList);   
+  const finalList = programList.map((list) => {
+    list.PGMID = list.PGMID.trim();
+    list.PGMTX = list.PGMTX.trim();
+    list.PGMTYP = list.PGMTYP.trim();
+    list.DIRNM = list.DIRNM.trim();
+    return list;
+  })
+  res.send(finalList);   
 }
 
 const getEntList = async(req, res) => {
