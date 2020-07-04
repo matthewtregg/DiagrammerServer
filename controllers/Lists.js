@@ -20,7 +20,14 @@ const getEntList = async(req, res) => {
   const dbname = req.params.dbName;
   const entities = new Entities ();
   const entityList = await entities.getFileList(dbname);
-  res.send(entityList);
+  const finalList = entityList.map((list) => {
+    console.log(list);
+    if (list.ENTID)list.ENTID = list.ENTID.trim();
+    if (list.ENTTX)list.ENTTX = list.ENTTX.trim();
+    if (list.DIRNM) list.DIRNM = list.DIRNM.trim();
+    return list;
+  })
+  res.send(finalList);
 }
 
 

@@ -33,6 +33,7 @@ router
   .get('/PgmSchema/:pgm/:ent', FullFiles.getPgmSchema)
   .get('/PgmDefs/:dbName', FullFiles.getPgmDefs)
   .get('/Entities/:dbName', FullFiles.getEntities)
+  .get('/EntSchema/:ent', FullFiles.getEntSchema)
 
 
 

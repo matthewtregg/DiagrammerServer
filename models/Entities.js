@@ -34,7 +34,7 @@ class Entities {
 
   async getFileList(dbName) {
     const [result] = await pool.execute (
-      `SELECT DISTINCT ENTID FROM ${dbName}.ENTITIES`   
+      `SELECT * FROM ${dbName}.ENTITIES`   
     )
     return result;
   }

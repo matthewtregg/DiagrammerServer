@@ -5,6 +5,8 @@ const Entities = require('../models/Entities');
 const PgmDefs = require('../models/PgmDefs');
 const PgmSchema = require('../models/PgmSchema');
 const PgmFiles = require('../models/PgmFiles');
+const EntSchema = require('../models/EntSchema');
+
 
 const getEntrels = async(req, res) => {
     const dbname = req.params.dbName;
@@ -31,10 +33,17 @@ const getPgmSchema = async(req, res) => {
     const pgm = req.params.pgm;
     const ent = req.params.ent;
     const pgmschema = new PgmSchema ();
-    const schemafile = await pgmschema.getPgmSchema(pgm,ent);
-    console.log(schemafile);
-    res.send(schemafile);
+    const pgmSchemafile = await pgmschema.getPgmSchema(pgm,ent);
+    res.send(pgmSchemafile);
 }
+
+const getEntSchema = async(req, res) => {
+    const ent = req.params.ent;
+    const fileSchema = new EntSchema ();
+    const fileSchemafile = await fileSchema.getEntSchema(ent);
+    res.send(fileSchemafile);
+}
+
 
 
 
@@ -61,5 +70,6 @@ module.exports = {
     getPgmDefs,
     getPgmSchema,
     getPgmFiles,
-    getEntities
+    getEntities,
+    getEntSchema,
 }
