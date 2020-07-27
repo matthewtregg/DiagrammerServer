@@ -7,6 +7,7 @@ const EntRelChart = require("./controllers/EntRelChart");
 const WhereUsed = require("./controllers/WhereUsed");
 const Repository = require("./controllers/Repository");
 const FullFiles = require("./controllers/FullFiles");
+const SavedDiagrams = require("./controllers/SavedDiagrams");
 
 router
   .get("/ProgramStructureChart/:dbName", Diagrams.createPgmStrChartTwo)
@@ -33,7 +34,9 @@ router
   .get("/PgmDefs/:dbName", FullFiles.getPgmDefs)
   .get("/Entities/:dbName", FullFiles.getEntities)
   .get("/EntSchema/:ent", FullFiles.getEntSchema)
-  .get("/PgmDiagSchemas/:pgms", FullFiles.getPgmDiagSchemas);
+  .get("/PgmDiagSchemas/:pgms", FullFiles.getPgmDiagSchemas)
+  .post("/saveDMD/:name", SavedDiagrams.saveDMD)
+  .get("/getDMDs", SavedDiagrams.getDMDs);
 
 // additional routes for:
 //1 GET PGMCODE BY PGMID & WHEREUSED INFO

@@ -22,7 +22,6 @@ const getPgmFiles = async (req, res) => {
     if (file.VIEWID) file.VIEWID = file.VIEWID.trim();
     return file;
   });
-  console.log(pgmFile);
   res.send(finalpgmFile);
 };
 
@@ -33,7 +32,7 @@ const getPgmSchema = async (req, res) => {
   const pgmSchemafile = await pgmschema.getPgmSchema(pgm, ent);
   const fileSchema = new EntSchema();
   const fileSchemafile = await fileSchema.getEntSchema(ent);
-  res.send([...fileSchemafile, ...pgmSchemafile]);
+  res.send({files:fileSchemafile, pgms:pgmSchemafile});
 };
 
 const getEntSchema = async (req, res) => {
