@@ -6,6 +6,8 @@ const saveDMD = async (req, res) => {
   const links = req.body.links;
   DMDNodeArray = objRelDMDNodeMap(nodes, name);
   DMDLinksArray = objRelDMDLinksMap(links, name);
+  console.log(DMDNodeArray);
+  console.log(DMDLinksArray);
   const savedDiags = new SavedDiags();
   const savedDMDNodes = await savedDiags.saveDMDNodes(DMDNodeArray);
   const savedDMDLinks = await savedDiags.saveDMDLinks(DMDLinksArray);
@@ -46,6 +48,12 @@ const objRelDMDLinksMap = (links, name) => {
     const targetFx = link.target.fx ? link.target.fx : 0;
     const targetFy = link.target.fy ? link.target.fy : 0;
     const relID = link.source.name + ":" + link.target.name;
+    const linktextLength = link.source.textLength ? link.source.textLength : 0;
+    const linkStraight = link.straight ? 1 : 0;
+    const targettextLength = link.target.textLength
+      ? link.target.textLength
+      : 0;
+
     const linksRow =
       "(" +
       "'" +
@@ -72,7 +80,7 @@ const objRelDMDLinksMap = (links, name) => {
       "," +
       link.source.rightX +
       "," +
-      link.source.textLength +
+      linktextLength +
       "," +
       link.source.x +
       "," +
@@ -102,7 +110,7 @@ const objRelDMDLinksMap = (links, name) => {
       "," +
       link.target.rightX +
       "," +
-      link.target.textLength +
+      targettextLength +
       "," +
       link.target.x +
       "," +
@@ -123,6 +131,8 @@ const objRelDMDLinksMap = (links, name) => {
       "'" +
       name +
       "'" +
+      "," +
+      linkStraight +
       ")";
 
     // link Row push
@@ -135,6 +145,7 @@ const objRelDMDNodeMap = (nodes, name) => {
   const newNodes = nodes.map((node) => {
     const nodeFx = node.fx ? node.fx : 0;
     const nodeFy = node.fy ? node.fy : 0;
+    const textLength = node.textLength ? node.textLength : 0;
     const nodeRow =
       "(" +
       "'" +
@@ -155,7 +166,7 @@ const objRelDMDNodeMap = (nodes, name) => {
       "," +
       node.rightX +
       "," +
-      node.textLength +
+      textLength +
       "," +
       node.vx +
       "," +
